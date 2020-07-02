@@ -23,6 +23,31 @@
         </div>
     </div>
 
+    <table class="table table-striped table table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th>
+                    Description
+                </th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @{int i = 0;}
+            @foreach (var post in Model.Posts)
+            {
+
+
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => modelItem.Description)
+                    </td>
+                </tr>
+            }
+
+
+        </tbody>
+    </table>
 }
 else
 {
