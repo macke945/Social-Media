@@ -11,6 +11,12 @@ namespace Social_Media.Services
     {
         private readonly ApplicationDbContext context;
 
+        public PostService(ApplicationDbContext context)
+        {
+            this.context = context;
+        }
+
+
         public void AddPost(Post post)
         {
             context.Add(post);

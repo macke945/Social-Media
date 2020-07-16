@@ -9,7 +9,7 @@
 {
     <div class="row">
         <div class="col-md-4">
-            <form enctype="multipart/form-data" asp-action="AddContributions">
+            <form enctype="multipart/form-data" asp-action="Index">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
                     <label asp-for="Description" class="control-label">Description</label>
@@ -27,20 +27,24 @@
         <thead class="thead-dark">
             <tr>
                 <th>
+                    ID
+                </th>
+                <th>
                     Description
                 </th>
 
             </tr>
         </thead>
         <tbody>
-            @{int i = 0;}
-            @foreach (var post in Model.Posts)
+            @foreach (var item in Model.Posts)
             {
-
 
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => modelItem.Description)
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
                     </td>
                 </tr>
             }

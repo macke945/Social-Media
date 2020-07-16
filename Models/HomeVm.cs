@@ -9,6 +9,7 @@ namespace Social_Media.Models
     public class HomeVm
     {
         public ICollection<Post> Posts { get; set; } = new List<Post>();
+        public int Id { get; set; }
         public string Description { get; set; }
     }
 }

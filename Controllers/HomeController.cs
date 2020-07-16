@@ -13,7 +13,8 @@ namespace Social_Media.Controllers
 {
     public class HomeController : Controller
     {
-        public readonly PostService postService;
+        private readonly PostService postService;
+
         public HomeController(PostService postService)
         {
             this.postService = postService;
@@ -21,7 +22,15 @@ namespace Social_Media.Controllers
 
         public IActionResult Index()
         {
-            return View();
+
+            var vm = new HomeVm();
+
+            foreach (var post in postService.GetAllPosts())
+            {
+                vm.Id = post.Id;
+                vm.Description = post.Description;
+            }
+            return View(vm);
         }
 
         [HttpPost]
