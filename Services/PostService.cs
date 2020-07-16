@@ -28,5 +28,14 @@ namespace Social_Media.Services
             return context.Post
                 .ToList();
         }
+
+        public string GetUserNameById(string id)
+        {
+            var user = context.Users
+                .Find(id);
+
+            return user.UserName;
+
+        }
     }
 }

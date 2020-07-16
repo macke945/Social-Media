@@ -11,5 +11,6 @@ namespace Social_Media.Models
         public ICollection<Post> Posts { get; set; } = new List<Post>();
         public int Id { get; set; }
         public string Description { get; set; }
+        public string UserName { get; set; }
     }
 }

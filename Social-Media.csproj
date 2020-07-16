@@ -6,6 +6,13 @@
     <RootNamespace>Social_Media</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Data\Migrations\20200702151923_init.cs" />
+    <Compile Remove="Data\Migrations\20200702151923_init.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200716223441_initi.cs" />
+    <Compile Remove="Data\Migrations\20200716223441_initi.Designer.cs" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.0" />

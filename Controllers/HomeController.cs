@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -35,9 +36,15 @@ namespace Social_Media.Controllers
         {
             if (ModelState.IsValid)
             {
+                ClaimsPrincipal currentUser = this.User;
+                var currentUserId = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
+
                 var post = new Post();
 
                 post.Description = vm.Description;
+                post.UserId = currentUserId;
+
+                postService.GetUserNameById(currentUserId);
 
                 postService.AddPost(post);
 

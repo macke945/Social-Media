@@ -12,7 +12,9 @@ namespace Social_Media.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Description = table.Column<string>(nullable: true)
+                    Description = table.Column<string>(nullable: true),
+                    UserId = table.Column<string>(nullable: true),
+                    UserName = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

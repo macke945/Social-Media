@@ -10,7 +10,7 @@ using Social_Media.Data;
 namespace Social_Media.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200702151923_init")]
+    [Migration("20200716224714_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -229,6 +229,12 @@ namespace Social_Media.Data.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserName")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
