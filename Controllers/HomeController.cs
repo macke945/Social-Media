@@ -25,11 +25,7 @@ namespace Social_Media.Controllers
 
             var vm = new HomeVm();
 
-            foreach (var post in postService.GetAllPosts())
-            {
-                vm.Id = post.Id;
-                vm.Description = post.Description;
-            }
+            vm.Posts = postService.GetAllPosts();
             return View(vm);
         }
 
