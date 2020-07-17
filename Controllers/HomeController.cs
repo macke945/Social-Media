@@ -44,7 +44,9 @@ namespace Social_Media.Controllers
                 post.Description = vm.Description;
                 post.UserId = currentUserId;
 
-                postService.GetUserNameById(currentUserId);
+                var UserName = postService.GetUserNameById(currentUserId);
+
+                post.UserName = UserName;
 
                 postService.AddPost(post);
 

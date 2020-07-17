@@ -10,7 +10,7 @@ using Social_Media.Data;
 namespace Social_Media.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200716233001_init")]
+    [Migration("20200717082910_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -84,10 +84,6 @@ namespace Social_Media.Data.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
@@ -139,8 +135,6 @@ namespace Social_Media.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -238,20 +232,14 @@ namespace Social_Media.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
-
                     b.ToTable("Post");
-                });
-
-            modelBuilder.Entity("Social_Media.Data.DataTables.ApplicationUser", b =>
-                {
-                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
-
-                    b.HasDiscriminator().HasValue("ApplicationUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -303,13 +291,6 @@ namespace Social_Media.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Social_Media.Data.DataTables.Post", b =>
-                {
-                    b.HasOne("Social_Media.Data.DataTables.ApplicationUser", "User")
-                        .WithMany("Posts")
-                        .HasForeignKey("UserId");
                 });
 #pragma warning restore 612, 618
         }
