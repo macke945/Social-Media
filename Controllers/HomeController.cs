@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Logging;
 using Social_Media.Data.DataTables;
 using Social_Media.Models;
@@ -15,10 +17,12 @@ namespace Social_Media.Controllers
     public class HomeController : Controller
     {
         private readonly PostService postService;
+        private readonly IHostingEnvironment hostingEnvironment;
 
-        public HomeController(PostService postService)
+        public HomeController(PostService postService, IHostingEnvironment hostingEnvironment)
         {
             this.postService = postService;
+            this.hostingEnvironment = hostingEnvironment;
         }
 
         public IActionResult Index()
@@ -47,6 +51,23 @@ namespace Social_Media.Controllers
                 var UserName = postService.GetUserNameById(currentUserId);
 
                 post.UserName = UserName;
+                string uniqueFileName = null;
+                if (postService.IsImage(vm.Image) && vm.Image.Length < (3 * 1024 * 1024))
+                {
+                    string uploadFolder = Path.Combine(hostingEnvironment.WebRootPath, "images");
+                    uniqueFileName = Guid.NewGuid().ToString() + "_" + vm.Image.FileName;
+                    string filePath = Path.Combine(uploadFolder, uniqueFileName);
+
+                    using (var fileStream = new FileStream(filePath, FileMode.Create))
+                    {
+                        vm.Image.CopyTo(fileStream);
+                    }
+                    post.ImagePath = uniqueFileName;
+                }
+                else
+                {
+                    post.ImagePath = null;
+                }
 
                 postService.AddPost(post);
 

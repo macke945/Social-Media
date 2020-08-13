@@ -15,10 +15,14 @@
                     <label asp-for="Description" class="control-label">Description</label>
                     <input asp-for="Description" class="form-control" />
                     <span asp-validation-for="Description" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="Post" class="btn btn-primary" />
-                </div>
+                    <div class="form-group">
+                        <label asp-for="Image" class="control-label">Picture</label>
+                        <input asp-for="Image" class="form-control-file" />
+                        <span asp-validation-for="Image" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Post" class="btn btn-primary" />
+                    </div>
             </form>
         </div>
     </div>
@@ -31,6 +35,9 @@
                 </th>
                 <th>
                     Description
+                </th>
+                <th>
+                    Picture
                 </th>
 
             </tr>
@@ -45,6 +52,9 @@
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        <img src="~/images/@Url.Content(item.ImagePath)" alt="Image not loaded" width="200" />
                     </td>
                 </tr>
             }
