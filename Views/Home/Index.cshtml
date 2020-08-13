@@ -23,6 +23,7 @@
                     <div class="form-group">
                         <input type="submit" value="Post" class="btn btn-primary" />
                     </div>
+                </div>
             </form>
         </div>
     </div>
@@ -53,9 +54,12 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.Description)
                     </td>
-                    <td>
-                        <img src="~/images/@Url.Content(item.ImagePath)" alt="Image not loaded" width="200" />
-                    </td>
+                    @if (item.ImagePath != null)
+                    {
+                        <td>
+                            <img src="~/images/@Url.Content(item.ImagePath)" width="200" />
+                        </td>
+                    }
                 </tr>
             }
 

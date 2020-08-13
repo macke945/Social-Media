@@ -52,7 +52,12 @@ namespace Social_Media.Controllers
 
                 post.UserName = UserName;
                 string uniqueFileName = null;
-                if (postService.IsImage(vm.Image) && vm.Image.Length < (3 * 1024 * 1024))
+                if (vm.Image == null)
+                {
+                    postService.AddPost(post);
+                }
+
+                else if (postService.IsImage(vm.Image) && vm.Image.Length < (3 * 1024 * 1024))
                 {
                     string uploadFolder = Path.Combine(hostingEnvironment.WebRootPath, "images");
                     uniqueFileName = Guid.NewGuid().ToString() + "_" + vm.Image.FileName;
@@ -63,13 +68,8 @@ namespace Social_Media.Controllers
                         vm.Image.CopyTo(fileStream);
                     }
                     post.ImagePath = uniqueFileName;
+                    postService.AddPost(post);
                 }
-                else
-                {
-                    post.ImagePath = null;
-                }
-
-                postService.AddPost(post);
 
                 return RedirectToAction(nameof(Index));
             }
