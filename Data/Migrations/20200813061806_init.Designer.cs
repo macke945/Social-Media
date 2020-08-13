@@ -10,7 +10,7 @@ using Social_Media.Data;
 namespace Social_Media.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200717082910_init")]
+    [Migration("20200813061806_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
