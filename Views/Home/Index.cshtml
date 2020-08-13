@@ -5,6 +5,8 @@
 @{
     ViewData["Title"] = "Home Page";
 }
+<link rel="stylesheet" href="~/css/site.css" />
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 @if (SignInManager.IsSignedIn(User))
 {
     <div class="row">
@@ -69,5 +71,7 @@
 }
 else
 {
-    <h2>Penis</h2>
+    <div class="Register-Button-Home">
+        <h1><a href="https://localhost:44348/Identity/Account/Register">Register here</a></h1>
+    </div>
 }
