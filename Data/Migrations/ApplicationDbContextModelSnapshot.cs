@@ -241,6 +241,9 @@ namespace Social_Media.Data.Migrations
                     b.Property<string>("ImagePath")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("TimeOfPost")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
@@ -254,6 +257,34 @@ namespace Social_Media.Data.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Post");
+                });
+
+            modelBuilder.Entity("Social_Media.Data.DataTables.Profile", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ImagePath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Introduction")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique()
+                        .HasFilter("[UserId] IS NOT NULL");
+
+                    b.ToTable("Profile");
                 });
 
             modelBuilder.Entity("Social_Media.Data.DataTables.ApplicationUser", b =>
@@ -329,6 +360,13 @@ namespace Social_Media.Data.Migrations
                     b.HasOne("Social_Media.Data.DataTables.ApplicationUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("Social_Media.Data.DataTables.Profile", b =>
+                {
+                    b.HasOne("Social_Media.Data.DataTables.ApplicationUser", "User")
+                        .WithOne("Profile")
+                        .HasForeignKey("Social_Media.Data.DataTables.Profile", "UserId");
                 });
 #pragma warning restore 612, 618
         }

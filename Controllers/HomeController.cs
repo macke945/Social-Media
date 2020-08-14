@@ -31,6 +31,7 @@ namespace Social_Media.Controllers
             var vm = new HomeVm();
 
             vm.Posts = postService.GetAllPosts();
+
             return View(vm);
         }
 

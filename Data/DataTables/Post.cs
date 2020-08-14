@@ -14,5 +14,6 @@ namespace Social_Media.Data.DataTables
         public string UserId { get; set; }
         public string UserName { get; set; }
         public ApplicationUser User { get; set; }
+        public DateTime TimeOfPost { get; set; } = DateTime.UtcNow;
     }
 }

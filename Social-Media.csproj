@@ -23,6 +23,10 @@
     <Compile Remove="Data\Migrations\20200717082910_init.Designer.cs" />
     <Compile Remove="Data\Migrations\20200813061806_init.cs" />
     <Compile Remove="Data\Migrations\20200813061806_init.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200813095537_init.cs" />
+    <Compile Remove="Data\Migrations\20200813095537_init.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200814094803_testingtime.cs" />
+    <Compile Remove="Data\Migrations\20200814094803_testingtime.Designer.cs" />
   </ItemGroup>
 
 
