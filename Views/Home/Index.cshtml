@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Social_Media</title>
-    <link rel="stylesheet" href="~/css/homestyles.css" type="text/css"/>
+    <link rel="stylesheet" href="~/css/homestyles.css" type="text/css" />
 </head>
 <body>
     @if (SignInManager.IsSignedIn(User))
@@ -56,7 +56,9 @@
 
                     <tr>
                         <td>
-                            @Html.DisplayFor(modelItem => item.UserName)
+                            <a asp-area="" asp-controller="Profile" asp-action="Index" asp-route-id="@item.UserName">
+                                @Html.DisplayFor(modelItem => item.UserName)
+                            </a>
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Description)

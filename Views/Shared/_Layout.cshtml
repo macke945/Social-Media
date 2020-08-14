@@ -29,7 +29,7 @@
                         @if (SignInManager.IsSignedIn(User))
                         {
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Profile" asp-action="Index">My Profile</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Profile" asp-action="Index" asp-route-id="@User.Identity.Name">My Profile</a>
                         </li>
                         }
                     </ul>
