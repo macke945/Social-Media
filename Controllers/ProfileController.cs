@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Social_Media.Models;
 
 namespace Social_Media.Controllers
 {
@@ -10,7 +11,8 @@ namespace Social_Media.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            var vm = new ProfileVm();
+            return View(vm);
         }
     }
 }

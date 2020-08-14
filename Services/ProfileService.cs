@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Social_Media.Data;
+using Social_Media.Data.DataTables;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -49,9 +50,10 @@ namespace Social_Media.Services
 
         }
 
-        public void UpdateProfile(int id)
+        public void UpdateProfile(Profile profile)
         {
-
+            context.Profile.Update(profile);
+            context.SaveChanges();
         }
     }
 }

@@ -1,1 +1,11 @@
-﻿
+﻿@model ProfileVm;
+
+@if (Model.ImagePath == null)
+{
+    <img src="~/profile-images/smileweird.png" width="100" />
+}
+
+else
+{
+    <img src="~/images/@Url.Content(Model.ImagePath)" width="100" />
+}
