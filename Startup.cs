@@ -29,7 +29,7 @@ namespace Social_Media
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<PostService>();
-
+            services.AddScoped<ProfileService>();
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
@@ -57,8 +57,19 @@ namespace Social_Media
                 // User settings.
                 options.User.AllowedUserNameCharacters =
                 "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@.";
-                options.User.RequireUniqueEmail = false;
+                options.User.RequireUniqueEmail = true;
 
+            });
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                // Cookie settings
+                options.Cookie.HttpOnly = true;
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(15);
+
+                options.LoginPath = "/Identity/Account/Login";
+                options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+                options.SlidingExpiration = true;
             });
         }
 

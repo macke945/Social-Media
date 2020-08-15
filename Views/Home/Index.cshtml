@@ -56,6 +56,14 @@
 
                     <tr>
                         <td>
+                            @if (Model.ProfileImagePath == null)
+                            {
+                                <img src="~/profile-images/smileweird.png" width="30" />
+                            }
+                            else
+                            {
+                                <img src="~/profile-images/@Url.Content(Model.ProfileImagePath)" width="30" />
+                            }
                             <a asp-area="" asp-controller="Profile" asp-action="Index" asp-route-id="@item.UserName">
                                 @Html.DisplayFor(modelItem => item.UserName)
                             </a>
