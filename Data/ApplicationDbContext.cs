@@ -7,7 +7,7 @@ using Social_Media.Data.DataTables;
 
 namespace Social_Media.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -15,8 +15,6 @@ namespace Social_Media.Data
         }
         public DbSet<Post> Post { get; set; }
         public DbSet<ApplicationUser> ApplicationUser { get; set; }
-        public DbSet<Profile> Profile { get; set; }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             ConfigureApplicationUser(modelBuilder);
@@ -31,9 +29,6 @@ namespace Social_Media.Data
                 .HasMany(a => a.Posts)
                 .WithOne(a => a.User)
                 .HasForeignKey(a => a.UserId);
-            modelBuilder.Entity<ApplicationUser>()
-                .HasOne(a => a.Profile)
-                .WithOne(a => a.User);
         }
 
         private void ConfigurePost(ModelBuilder modelBuilder)
@@ -43,5 +38,6 @@ namespace Social_Media.Data
                 .WithMany()
                 .HasForeignKey(p => p.UserId);
         }
+
     }
 }

@@ -49,11 +49,5 @@ namespace Social_Media.Services
             return user.UserName;
 
         }
-
-        public void UpdateProfile(Profile profile)
-        {
-            context.Profile.Update(profile);
-            context.SaveChanges();
-        }
     }
 }

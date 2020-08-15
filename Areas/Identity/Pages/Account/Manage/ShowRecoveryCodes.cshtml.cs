@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using Social_Media.Data.DataTables;
 
 namespace Social_Media.Areas.Identity.Pages.Account.Manage
 {

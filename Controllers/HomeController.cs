@@ -18,18 +18,18 @@ namespace Social_Media.Controllers
     {
         private readonly PostService postService;
         private readonly IHostingEnvironment hostingEnvironment;
+        private readonly ProfileService profileService;
 
-        public HomeController(PostService postService, IHostingEnvironment hostingEnvironment)
+        public HomeController(PostService postService, IHostingEnvironment hostingEnvironment, ProfileService profileService)
         {
             this.postService = postService;
             this.hostingEnvironment = hostingEnvironment;
+            this.profileService = profileService;
         }
 
         public IActionResult Index()
         {
-            var profile = new Profile();
             var vm = new HomeVm();
-            vm.ProfileImagePath = profile.ImagePath;
             vm.Posts = postService.GetAllPosts();
 
             return View(vm);
@@ -41,16 +41,14 @@ namespace Social_Media.Controllers
         {
             if (ModelState.IsValid)
             {
-                var profile = new Profile();
-                vm.ProfileImagePath = profile.ImagePath;
                 ClaimsPrincipal currentUser = this.User;
                 var currentUserId = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
                 var post = new Post();
                 post.Description = vm.Description;
                 post.UserId = currentUserId;
-
+                
                 var UserName = postService.GetUserNameById(currentUserId);
-
+                
                 post.UserName = UserName;
                 string uniqueFileName = null;
                 if (vm.Image == null)

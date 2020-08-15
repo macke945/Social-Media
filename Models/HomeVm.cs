@@ -14,7 +14,7 @@ namespace Social_Media.Models
         public string Description { get; set; }
         public string UserName { get; set; }
         public IFormFile Image { get; set; }
-        public string ProfileImagePath { get; set; }
+        public string ImagePath { get; set; }
         public DateTime TimeOfPost { get; set; } = DateTime.UtcNow;
     }
 }
