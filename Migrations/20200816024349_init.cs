@@ -164,6 +164,7 @@ namespace Social_Media.Migrations
                     ImagePath = table.Column<string>(nullable: true),
                     UserId = table.Column<string>(nullable: true),
                     UserName = table.Column<string>(nullable: true),
+                    ProfileImagePath = table.Column<string>(nullable: true),
                     TimeOfPost = table.Column<DateTime>(nullable: false),
                     ApplicationUserId = table.Column<string>(nullable: true)
                 },

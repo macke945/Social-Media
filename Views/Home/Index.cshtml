@@ -56,6 +56,7 @@
 
                     <tr>
                         <td>
+                            <img src="~/profile-images/@Url.Content(item.ProfileImagePath)" width="30"/>
                             <a asp-area="" asp-controller="Profile" asp-action="Index" asp-route-id="@item.UserName">
                                 @Html.DisplayFor(modelItem => item.UserName)
                             </a>

@@ -11,6 +11,8 @@ using Microsoft.Extensions.Logging;
 using Social_Media.Data.DataTables;
 using Social_Media.Models;
 using Social_Media.Services;
+using Social_Media.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Social_Media.Controllers
 {
@@ -19,19 +21,20 @@ namespace Social_Media.Controllers
         private readonly PostService postService;
         private readonly IHostingEnvironment hostingEnvironment;
         private readonly ProfileService profileService;
+        private readonly ApplicationDbContext _context;
 
-        public HomeController(PostService postService, IHostingEnvironment hostingEnvironment, ProfileService profileService)
+        public HomeController(PostService postService, IHostingEnvironment hostingEnvironment, ProfileService profileService, ApplicationDbContext context)
         {
             this.postService = postService;
             this.hostingEnvironment = hostingEnvironment;
             this.profileService = profileService;
+            _context = context;
         }
 
         public IActionResult Index()
         {
             var vm = new HomeVm();
             vm.Posts = postService.GetAllPosts();
-
             return View(vm);
         }
 
@@ -46,10 +49,11 @@ namespace Social_Media.Controllers
                 var post = new Post();
                 post.Description = vm.Description;
                 post.UserId = currentUserId;
-                
                 var UserName = postService.GetUserNameById(currentUserId);
-                
                 post.UserName = UserName;
+                var profileImagePath = postService.GetProfileImagePathByUserId(currentUserId);
+
+                post.ProfileImagePath = profileImagePath;
                 string uniqueFileName = null;
                 if (vm.Image == null)
                 {

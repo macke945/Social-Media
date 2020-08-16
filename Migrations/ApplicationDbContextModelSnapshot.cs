@@ -241,6 +241,9 @@ namespace Social_Media.Migrations
                     b.Property<string>("ImagePath")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ProfileImagePath")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("TimeOfPost")
                         .HasColumnType("datetime2");
 

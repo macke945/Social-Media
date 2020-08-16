@@ -40,6 +40,14 @@ namespace Social_Media.Services
             return user.UserName;
 
         }
+        public string GetProfileImagePathByUserId(string id)
+        {
+            var user = context.Users
+                .Find(id);
+
+            return user.ProfileImagePath;
+
+        }
         public bool IsImage(IFormFile formFile)
         {
             if (!string.Equals(formFile.ContentType, "image/jpg", StringComparison.OrdinalIgnoreCase) &&

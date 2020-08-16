@@ -10,7 +10,7 @@ using Social_Media.Data;
 namespace Social_Media.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200815163135_init")]
+    [Migration("20200816024349_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -241,6 +241,9 @@ namespace Social_Media.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ImagePath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProfileImagePath")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("TimeOfPost")
