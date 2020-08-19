@@ -35,6 +35,8 @@ namespace Social_Media.Controllers
             var currentUserId = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
 
             var user = _context.Users.FirstOrDefault(x => x.UserName == id);
+            var imagePath = profileService.GetProfileImagePathByUserId(currentUserId);
+            var introduction = profileService.GetIntroductionByUserId(currentUserId);
             vm.ImagePath = user.ProfileImagePath;
             vm.UserName = id;
             vm.Introduction = user.Introduction;
@@ -48,6 +50,7 @@ namespace Social_Media.Controllers
             ClaimsPrincipal currentUser = this.User;
             var currentUserId = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
             string uniqueFileName = null;
+            var userName = profileService.GetUserNameById(currentUserId);
             var user = _context.Users.FirstOrDefault(x => x.UserName == User.Identity.Name);
             user.Introduction = vm.Introduction;
             if (vm.Image == null)
