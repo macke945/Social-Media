@@ -48,6 +48,21 @@ namespace Social_Media.Services
 
             return user.UserName;
 
+
+        }
+
+        public void EditProfile(ApplicationUser user)
+        {
+            context.Users.Update(user);
+            context.SaveChanges();
+        }
+        public string GetProfileImagePathByUserId(string id)
+        {
+            var user = context.Users
+                .Find(id);
+
+            return user.ProfileImagePath;
+
         }
     }
 }

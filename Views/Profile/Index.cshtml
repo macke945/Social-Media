@@ -1,11 +1,26 @@
 ﻿@model ProfileVm;
-
-@if (Model.ImagePath == null)
+@if (User.Identity.Name == Model.UserName)
 {
-    <img src="~/profile-images/smileweird.png" width="100" />
+    <div class="row">
+        <div class="col-md-4">
+            <form enctype="multipart/form-data" asp-action="Index">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Introduction" class="control-label">Description</label>
+                    <input asp-for="Introduction" class="form-control" />
+                    <span asp-validation-for="Introduction" class="text-danger"></span>
+                    <div class="form-group">
+                        <label asp-for="Image" class="control-label">Picture</label>
+                        <input asp-for="Image" class="form-control-file" />
+                        <span asp-validation-for="Image" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Post" class="btn btn-primary" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 }
-
-else
-{
-    <img src="~/images/@Url.Content(Model.ImagePath)" width="100" />
-}
+<h2>@Model.UserName</h2>
+<img src="~/profile-images/@Url.Content(Model.ImagePath)" width="100" />

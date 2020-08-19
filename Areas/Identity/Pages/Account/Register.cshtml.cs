@@ -80,7 +80,7 @@ namespace Social_Media.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = Input.UserName, Email = Input.Email, ProfileImagePath = "smileweird.png"};
+                var user = new ApplicationUser { UserName = Input.UserName, Email = Input.Email, ProfileImagePath = "smileweird.png", Introduction = "PlaceHolder"};
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
