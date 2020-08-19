@@ -64,5 +64,13 @@ namespace Social_Media.Services
             return user.ProfileImagePath;
 
         }
+        public string GetIntroductionByUserId(string id)
+        {
+            var user = context.Users
+                .Find(id);
+
+            return user.Introduction;
+
+        }
     }
 }

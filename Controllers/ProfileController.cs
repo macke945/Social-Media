@@ -33,13 +33,13 @@ namespace Social_Media.Controllers
             var vm = new ProfileVm();
             ClaimsPrincipal currentUser = this.User;
             var currentUserId = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
-            var currentUserName = profileService.GetUserNameById(currentUserId);
 
-            
+            var user = _context.Users.FirstOrDefault(x => x.UserName == id);
             var imagePath = profileService.GetProfileImagePathByUserId(currentUserId);
-            vm.ImagePath = imagePath;
+            var introduction = profileService.GetIntroductionByUserId(currentUserId);
+            vm.ImagePath = user.ProfileImagePath;
             vm.UserName = id;
-
+            vm.Introduction = user.Introduction;
             return View(vm);
         }
 
