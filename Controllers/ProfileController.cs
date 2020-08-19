@@ -27,6 +27,7 @@ namespace Social_Media.Controllers
             this.profileService = profileService;
             _context = context;
         }
+
         public IActionResult Index(string id)
         {
             var vm = new ProfileVm();
@@ -70,7 +71,7 @@ namespace Social_Media.Controllers
                 user.ProfileImagePath = uniqueFileName;
                 profileService.EditProfile(user);
             }
-            return View(vm);
+            return RedirectToAction(nameof(Index));
         }
     }
 }
