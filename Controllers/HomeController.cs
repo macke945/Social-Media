@@ -34,7 +34,13 @@ namespace Social_Media.Controllers
         public IActionResult Index()
         {
             var vm = new HomeVm();
-            vm.Posts = postService.GetAllPosts();
+            var allPosts = postService.GetAllPosts();
+            vm.Posts = allPosts;
+            foreach (var posts in allPosts)
+            {
+                var user = _context.Users.FirstOrDefault(x => x.UserName == posts.UserName);
+                posts.ProfileImagePath = user.ProfileImagePath;
+            }
             return View(vm);
         }
 
@@ -51,9 +57,7 @@ namespace Social_Media.Controllers
                 post.UserId = currentUserId;
                 var UserName = postService.GetUserNameById(currentUserId);
                 post.UserName = UserName;
-                var profileImagePath = postService.GetProfileImagePathByUserId(currentUserId);
 
-                post.ProfileImagePath = profileImagePath;
                 string uniqueFileName = null;
                 if (vm.Image == null)
                 {
