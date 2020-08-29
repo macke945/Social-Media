@@ -16,5 +16,6 @@ namespace Social_Media.Data.DataTables
         public ApplicationUser User { get; set; }
         public string ProfileImagePath { get; set; }
         public DateTime TimeOfPost { get; set; } = DateTime.UtcNow;
+        public List<DislikePost> DislikePosts { get; set; }
     }
 }

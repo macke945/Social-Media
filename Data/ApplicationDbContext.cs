@@ -15,10 +15,13 @@ namespace Social_Media.Data
         }
         public DbSet<Post> Post { get; set; }
         public DbSet<ApplicationUser> ApplicationUser { get; set; }
+        public DbSet<DislikePost> DislikePost { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             ConfigureApplicationUser(modelBuilder);
             ConfigurePost(modelBuilder);
+            ConfigureDislikePost(modelBuilder);
+
 
             base.OnModelCreating(modelBuilder);
         }
@@ -37,6 +40,16 @@ namespace Social_Media.Data
                 .HasOne(p => p.User)
                 .WithMany()
                 .HasForeignKey(p => p.UserId);
+            modelBuilder.Entity<Post>()
+                .HasMany(p => p.DislikePosts)
+                .WithOne(p => p.Post)
+                .HasForeignKey(p => p.PostId);
+        }
+
+        private void ConfigureDislikePost(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<DislikePost>()
+               .HasKey(x => new { x.UserId, x.PostId });
         }
 
     }

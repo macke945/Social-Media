@@ -10,7 +10,7 @@ using Social_Media.Data;
 namespace Social_Media.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200816024349_init")]
+    [Migration("20200829072040_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -227,6 +227,21 @@ namespace Social_Media.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("Social_Media.Data.DataTables.DislikePost", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("PostId")
+                        .HasColumnType("int");
+
+                    b.HasKey("UserId", "PostId");
+
+                    b.HasIndex("PostId");
+
+                    b.ToTable("DislikePost");
+                });
+
             modelBuilder.Entity("Social_Media.Data.DataTables.Post", b =>
                 {
                     b.Property<int>("Id")
@@ -309,6 +324,21 @@ namespace Social_Media.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
                     b.HasOne("Social_Media.Data.DataTables.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Social_Media.Data.DataTables.DislikePost", b =>
+                {
+                    b.HasOne("Social_Media.Data.DataTables.Post", "Post")
+                        .WithMany("DislikePosts")
+                        .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Social_Media.Data.DataTables.ApplicationUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)

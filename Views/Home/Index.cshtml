@@ -56,14 +56,21 @@
 
                     <tr>
                         <td>
-                            <img src="~/profile-images/@Url.Content(item.ProfileImagePath)" width="30"/>
+                            @if (item.DislikePosts.Count != 0)
+                            {
+                                <h7>@Html.DisplayFor(modelItem => item.DislikePosts.Count) Dislikes</h7>
+                            }
+                            <img src="~/profile-images/@Url.Content(item.ProfileImagePath)" width="30" />
                             <a asp-area="" asp-controller="Profile" asp-action="Index" asp-route-id="@item.UserName">
                                 @Html.DisplayFor(modelItem => item.UserName)
                             </a>
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Description)
-                            <a asp-area="" asp-controller="Home" asp-action="Dislike" asp-route-id="@item.Id">Dislike</a>
+
+                            <a asp-area="" asp-action="Dislike" asp-route-id="@item.Id">
+                                <img src="~/site-images/thumbs-down.png" width="30" />
+                            </a>
                         </td>
                         @if (item.ImagePath != null)
                         {

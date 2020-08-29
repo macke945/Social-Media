@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Social_Media.Data;
 using Social_Media.Data.DataTables;
 using System;
@@ -28,6 +29,7 @@ namespace Social_Media.Services
         public ICollection<Post> GetAllPosts()
         {
             return context.Post
+            .Include(p => p.DislikePosts)
             .OrderByDescending(x => x.TimeOfPost)
                 .ToList();
         }
@@ -71,6 +73,17 @@ namespace Social_Media.Services
             }
 
             return true;
+        }
+
+        public int CountUserDislikes(ApplicationUser user)
+        {
+
+            int dislikes = 0;
+
+            foreach (var posts in user.Posts)
+                dislikes += posts.DislikePosts.Count();
+
+            return dislikes;
         }
     }
 }

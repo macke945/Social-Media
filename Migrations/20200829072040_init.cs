@@ -185,6 +185,30 @@ namespace Social_Media.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "DislikePost",
+                columns: table => new
+                {
+                    UserId = table.Column<string>(nullable: false),
+                    PostId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DislikePost", x => new { x.UserId, x.PostId });
+                    table.ForeignKey(
+                        name: "FK_DislikePost_Post_PostId",
+                        column: x => x.PostId,
+                        principalTable: "Post",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_DislikePost_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -225,6 +249,11 @@ namespace Social_Media.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_DislikePost_PostId",
+                table: "DislikePost",
+                column: "PostId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Post_ApplicationUserId",
                 table: "Post",
                 column: "ApplicationUserId");
@@ -253,10 +282,13 @@ namespace Social_Media.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Post");
+                name: "DislikePost");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "Post");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

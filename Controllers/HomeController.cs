@@ -22,12 +22,15 @@ namespace Social_Media.Controllers
         private readonly IHostingEnvironment hostingEnvironment;
         private readonly ProfileService profileService;
         private readonly ApplicationDbContext _context;
+        private readonly DislikeService dislikeService;
 
-        public HomeController(PostService postService, IHostingEnvironment hostingEnvironment, ProfileService profileService, ApplicationDbContext context)
+        public HomeController(PostService postService, IHostingEnvironment hostingEnvironment,
+            ProfileService profileService, ApplicationDbContext context, DislikeService dislikeService)
         {
             this.postService = postService;
             this.hostingEnvironment = hostingEnvironment;
             this.profileService = profileService;
+            this.dislikeService = dislikeService;
             _context = context;
         }
 
@@ -82,6 +85,28 @@ namespace Social_Media.Controllers
             }
 
             return RedirectToAction("Error", "Home", "");
+        }
+
+
+        public async Task<IActionResult> Dislike(HomeVm vm, int id)
+        {
+            ClaimsPrincipal currentUser = this.User;
+            var currentUserId = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+            var dislikePost = new DislikePost();
+
+            dislikePost.PostId = id;
+            dislikePost.UserId = currentUserId;
+
+            if (dislikeService.UserAbleToDislikePost(dislikePost))
+            {
+                dislikeService.AddDislikePost(dislikePost);
+            }
+            else
+            {
+                dislikeService.RemoveDislikePost(dislikePost);
+            }
+            return RedirectToAction(nameof(Index));
         }
 
 
