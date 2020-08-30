@@ -1,12 +1,11 @@
-﻿using Microsoft.AspNetCore.Identity;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Social_Media.Data.DataTables
 {
-    public class Post
+    public class Comment
     {
         public int Id { get; set; }
         public string Description { get; set; }
@@ -16,7 +15,8 @@ namespace Social_Media.Data.DataTables
         public ApplicationUser User { get; set; }
         public string ProfileImagePath { get; set; }
         public DateTime TimeOfPost { get; set; } = DateTime.UtcNow;
-        public List<DislikePost> DislikePosts { get; set; }
-        public List<Comment> Comments { get; set; }
+        public List<DislikeComment> DislikeComments { get; set; }
+        public int PostId { get; set; }
+        public Post Post { get; set; }
     }
 }

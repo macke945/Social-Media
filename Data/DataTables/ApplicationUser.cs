@@ -11,5 +11,6 @@ namespace Social_Media.Data.DataTables
         public string Introduction { get; set; }
         public virtual string ProfileImagePath { get; set; }
         public List<Post> Posts { get; set; } = new List<Post>();
+        public List<Comment> Comments { get; set; } = new List<Comment>();
     }
 }

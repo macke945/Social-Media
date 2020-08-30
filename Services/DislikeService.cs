@@ -27,6 +27,7 @@ namespace Social_Media.Services
             context.Remove(dislikePost);
             context.SaveChanges();
         }
+
         public bool UserAbleToDislikePost(DislikePost dislikePost)
         {
             return !context.DislikePost
