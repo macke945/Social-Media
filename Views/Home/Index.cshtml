@@ -82,31 +82,32 @@
                     <span asp-validation-for="Image" class="text-danger"></span>
                 </div>
             </form>
+            @foreach (var comment in post.Comments)
+            {
+                <div class="Comment-Div">
+                    <a asp-area="" asp-controller="Profile" asp-action="Index" asp-route-id="@comment.UserName">
+                        <img src="~/profile-images/@Url.Content(comment.ProfileImagePath)" width="30" />
+                    </a>
+                    @if (comment.DislikeComments.Count == 1)
+                    {
+                        <h7>@Html.DisplayFor(modelItem => comment.DislikeComments.Count) Dislike</h7>
+                    }
+                    else if (comment.DislikeComments.Count >= 2)
+                    {
+                        <h7>@Html.DisplayFor(modelItem => comment.DislikeComments.Count) Dislikes</h7>
+                    }
+                    <div class="Comment-Description-Div">
+                        @Html.DisplayFor(modelItem => comment.Description)
+                    </div>
 
-            <div class="Comment-Div">
-                <a asp-area="" asp-controller="Profile" asp-action="Index" asp-route-id="@comment.UserName">
-                    <img src="~/profile-images/@Url.Content(comment.ProfileImagePath)" width="30" />
-                </a>
-                @if (comment.DislikeComments.Count == 1)
-                {
-                    <h7>@Html.DisplayFor(modelItem => comment.DislikeComments.Count) Dislike</h7>
-                }
-                else if (comment.DislikeComments.Count >= 2)
-                {
-                    <h7>@Html.DisplayFor(modelItem => comment.DislikeComments.Count) Dislikes</h7>
-                }
-                <div class="Comment-Description-Div">
-                    @Html.DisplayFor(modelItem => comment.Description)
+                    @if (comment.ImagePath != null)
+                    {
+
+                        <img src="~/comment-images/@Url.Content(comment.ImagePath)" width="200" />
+
+                    }
                 </div>
-
-                @if (comment.ImagePath != null)
-                {
-
-                    <img src="~/comment-images/@Url.Content(comment.ImagePath)" width="200" />
-
-                }
-            </div>
-
+            }
         }
 
     }

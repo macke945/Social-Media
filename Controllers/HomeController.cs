@@ -41,18 +41,18 @@ namespace Social_Media.Controllers
         {
             var vm = new HomeVm();
             var allPosts = postService.GetAllPosts();
-            var commentsByPostId = commentService.GetAllCommentsByPostId(id);
             vm.Posts = allPosts;
-            vm.Comments = commentsByPostId;
             foreach (var posts in allPosts)
             {
                 var user = _context.Users.FirstOrDefault(x => x.UserName == posts.UserName);
                 posts.ProfileImagePath = user.ProfileImagePath;
-            }
-            foreach (var comments in commentsByPostId)
-            {
-                var user = _context.Users.FirstOrDefault(x => x.UserName == comments.UserName);
-                comments.ProfileImagePath = user.ProfileImagePath;
+                var commentsByPostId = commentService.GetAllCommentsByPostId(id);
+                vm.Comments = commentsByPostId;
+                foreach (var comments in commentsByPostId)
+                {
+                    var userComment = _context.Users.FirstOrDefault(x => x.UserName == comments.UserName);
+                    comments.ProfileImagePath = userComment.ProfileImagePath;
+                }
             }
             return View(vm);
         }
@@ -136,7 +136,7 @@ namespace Social_Media.Controllers
             string uniqueFileName = null;
             if (vm.CommentImage == null)
             {
-               commentService.AddComment(comment);
+                commentService.AddComment(comment);
             }
 
             else if (commentService.IsImage(vm.Image) && vm.Image.Length < (3 * 1024 * 1024))
@@ -153,6 +153,26 @@ namespace Social_Media.Controllers
                 commentService.AddComment(comment);
             }
 
+            return RedirectToAction(nameof(Index));
+        }
+        public async Task<IActionResult> DislikeComment(HomeVm vm, int id)
+        {
+            ClaimsPrincipal currentUser = this.User;
+            var currentUserId = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+            var dislikeComment = new DislikeComment();
+
+            dislikeComment.CommentId = id;
+            dislikeComment.UserId = currentUserId;
+
+            if (dislikeService.UserAbleToDislikeComment(dislikeComment))
+            {
+                dislikeService.AddDislikeComment(dislikeComment);
+            }
+            else
+            {
+                dislikeService.RemoveDislikeComment(dislikeComment);
+            }
             return RedirectToAction(nameof(Index));
         }
 

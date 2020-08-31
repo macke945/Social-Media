@@ -75,15 +75,5 @@ namespace Social_Media.Services
             return true;
         }
 
-        public int CountUserDislikes(ApplicationUser user)
-        {
-
-            int dislikes = 0;
-
-            foreach (var posts in user.Posts)
-                dislikes += posts.DislikePosts.Count();
-
-            return dislikes;
-        }
     }
 }

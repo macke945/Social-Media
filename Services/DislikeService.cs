@@ -34,6 +34,25 @@ namespace Social_Media.Services
                 .Where(v => v.UserId == dislikePost.UserId && v.PostId == dislikePost.PostId)
                 .Any();
         }
+        public void AddDislikeComment(DislikeComment dislikeComment)
+        {
+            context.Add(dislikeComment);
+            context.SaveChanges();
+        }
+
+        public void RemoveDislikeComment(DislikeComment dislikeComment)
+        {
+            context.Remove(dislikeComment);
+            context.SaveChanges();
+        }
+
+        public bool UserAbleToDislikeComment(DislikeComment dislikeComment)
+        {
+            return !context.DislikePost
+                .Where(v => v.UserId == dislikeComment.UserId && v.PostId == dislikeComment.CommentId)
+                .Any();
+        }
+
 
     }
 }
