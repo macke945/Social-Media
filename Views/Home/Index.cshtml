@@ -22,68 +22,62 @@
                         <label asp-for="Description" class="control-label">Description</label>
                         <input asp-for="Description" class="form-control" />
                         <span asp-validation-for="Description" class="text-danger"></span>
-                        <div class="form-group">
-                            <label asp-for="Image" class="control-label">Picture</label>
-                            <input asp-for="Image" class="form-control-file" />
-                            <span asp-validation-for="Image" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <input type="submit" value="Post" class="btn btn-primary" />
-                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Image" class="control-label">Picture</label>
+                        <input asp-for="Image" class="form-control-file" />
+                        <span asp-validation-for="Image" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Post" class="btn btn-primary" />
                     </div>
                 </form>
             </div>
         </div>
 
-        <table class="table table-striped table table-bordered">
-            <thead class="thead-dark">
-                <tr>
-                    <th>
-                        User
-                    </th>
-                    <th>
-                        Description
-                    </th>
-                    <th>
-                        Picture
-                    </th>
 
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model.Posts)
-                {
+        @foreach (var item in Model.Posts)
+        {
 
-                    <tr>
-                        <td>
-                            @if (item.DislikePosts.Count != 0)
-                            {
-                                <h7>@Html.DisplayFor(modelItem => item.DislikePosts.Count) Dislikes</h7>
-                            }
-                            <img src="~/profile-images/@Url.Content(item.ProfileImagePath)" width="30" />
-                            <a asp-area="" asp-controller="Profile" asp-action="Index" asp-route-id="@item.UserName">
-                                @Html.DisplayFor(modelItem => item.UserName)
-                            </a>
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Description)
+            @if (item.DislikePosts.Count == 1)
+            {
+                <h7>@Html.DisplayFor(modelItem => item.DislikePosts.Count) Dislike</h7>
+            }
+            else if (item.DislikePosts.Count >= 2)
+            {
+                <h7>@Html.DisplayFor(modelItem => item.DislikePosts.Count) Dislikes</h7>
+            }
+            <img src="~/profile-images/@Url.Content(item.ProfileImagePath)" width="30" />
+            <a asp-area="" asp-controller="Profile" asp-action="Index" asp-route-id="@item.UserName">
+                @Html.DisplayFor(modelItem => item.UserName)
+            </a>
 
-                            <a asp-area="" asp-action="Dislike" asp-route-id="@item.Id">
-                                <img src="~/site-images/thumbs-down.png" width="30" />
-                            </a>
-                        </td>
-                        @if (item.ImagePath != null)
-                        {
-                            <td>
-                                <img src="~/images/@Url.Content(item.ImagePath)" width="200" />
-                            </td>
-                        }
-                    </tr>
-                }
+            @Html.DisplayFor(modelItem => item.Description)
 
+            <a asp-area="" asp-action="Dislike" asp-route-id="@item.Id">
+                <img src="~/site-images/thumbs-down.png" width="30" />
+            </a>
 
-            </tbody>
-        </table>
+            @if (item.ImagePath != null)
+            {
+
+                <img src="~/images/@Url.Content(item.ImagePath)" width="200" />
+
+            }
+
+            <div class="form-group">
+                <label asp-for="CommentDescription" class="control-label">Description</label>
+                <input asp-for="CommentDescription" class="form-control" />
+                <span asp-validation-for="CommentDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Image" class="control-label">Picture</label>
+                <input asp-for="Image" class="form-control-file" />
+                <span asp-validation-for="Image" class="text-danger"></span>
+            </div>
+        }
+
     }
     else
     {
