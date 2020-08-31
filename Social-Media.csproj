@@ -52,6 +52,7 @@
 
   <ItemGroup>
     <Folder Include="Data\Migrations\" />
+    <Folder Include="wwwroot\comment-images\" />
   </ItemGroup>
 
 </Project>

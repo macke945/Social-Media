@@ -32,6 +32,7 @@ namespace Social_Media
             services.AddScoped<PostService>();
             services.AddScoped<ProfileService>();
             services.AddScoped<DislikeService>();
+            services.AddScoped<CommentService>();
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(

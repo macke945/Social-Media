@@ -23,26 +23,36 @@ namespace Social_Media.Controllers
         private readonly ProfileService profileService;
         private readonly ApplicationDbContext _context;
         private readonly DislikeService dislikeService;
+        private readonly CommentService commentService;
 
         public HomeController(PostService postService, IHostingEnvironment hostingEnvironment,
-            ProfileService profileService, ApplicationDbContext context, DislikeService dislikeService)
+            ProfileService profileService, ApplicationDbContext context, DislikeService dislikeService,
+            CommentService commentService)
         {
             this.postService = postService;
             this.hostingEnvironment = hostingEnvironment;
             this.profileService = profileService;
             this.dislikeService = dislikeService;
+            this.commentService = commentService;
             _context = context;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int id)
         {
             var vm = new HomeVm();
             var allPosts = postService.GetAllPosts();
+            var commentsByPostId = commentService.GetAllCommentsByPostId(id);
             vm.Posts = allPosts;
+            vm.Comments = commentsByPostId;
             foreach (var posts in allPosts)
             {
                 var user = _context.Users.FirstOrDefault(x => x.UserName == posts.UserName);
                 posts.ProfileImagePath = user.ProfileImagePath;
+            }
+            foreach (var comments in commentsByPostId)
+            {
+                var user = _context.Users.FirstOrDefault(x => x.UserName == comments.UserName);
+                comments.ProfileImagePath = user.ProfileImagePath;
             }
             return View(vm);
         }
@@ -109,6 +119,42 @@ namespace Social_Media.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Comment(HomeVm vm)
+        {
+            var comment = new Comment();
+
+            ClaimsPrincipal currentUser = this.User;
+            var currentUserId = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
+            comment.Description = vm.Description;
+            comment.UserId = currentUserId;
+            var UserName = commentService.GetUserNameById(currentUserId);
+            comment.UserName = UserName;
+
+            string uniqueFileName = null;
+            if (vm.CommentImage == null)
+            {
+               commentService.AddComment(comment);
+            }
+
+            else if (commentService.IsImage(vm.Image) && vm.Image.Length < (3 * 1024 * 1024))
+            {
+                string uploadFolder = Path.Combine(hostingEnvironment.WebRootPath, "images");
+                uniqueFileName = Guid.NewGuid().ToString() + "_" + vm.Image.FileName;
+                string filePath = Path.Combine(uploadFolder, uniqueFileName);
+
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    vm.Image.CopyTo(fileStream);
+                }
+                comment.ImagePath = uniqueFileName;
+                commentService.AddComment(comment);
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

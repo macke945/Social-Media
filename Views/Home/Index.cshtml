@@ -40,46 +40,73 @@
         @foreach (var post in Model.Posts)
         {
 
-            @if (post.DislikePosts.Count == 1)
-            {
-                <h7>@Html.DisplayFor(modelItem => post.DislikePosts.Count) Dislike</h7>
-            }
-            else if (post.DislikePosts.Count >= 2)
-            {
-                <h7>@Html.DisplayFor(modelItem => post.DislikePosts.Count) Dislikes</h7>
-            }
-            <img src="~/profile-images/@Url.Content(post.ProfileImagePath)" width="30" />
-            <a asp-area="" asp-controller="Profile" asp-action="Index" asp-route-id="@post.UserName">
-                @Html.DisplayFor(modelItem => post.UserName)
-            </a>
+            <div class="Post-Div">
+                @if (post.DislikePosts.Count == 1)
+                {
+                    <h7>@Html.DisplayFor(modelItem => post.DislikePosts.Count) Dislike</h7>
+                }
+                else if (post.DislikePosts.Count >= 2)
+                {
+                    <h7>@Html.DisplayFor(modelItem => post.DislikePosts.Count) Dislikes</h7>
+                }
+                <a asp-area="" asp-controller="Profile" asp-action="Index" asp-route-id="@post.UserName">
+                    <img src="~/profile-images/@Url.Content(post.ProfileImagePath)" width="30" />
+                </a>
+                <a asp-area="" asp-controller="Profile" asp-action="Index" asp-route-id="@post.UserName">
+                    @Html.DisplayFor(modelItem => post.UserName)
+                </a>
+                <div class="Post-Description-Div">
+                    @Html.DisplayFor(modelItem => post.Description)
+                </div>
 
-            @Html.DisplayFor(modelItem => post.Description)
+                <a asp-area="" asp-action="Dislike" asp-route-id="@post.Id">
+                    <img src="~/site-images/thumbs-down.png" width="30" />
+                </a>
 
-            <a asp-area="" asp-action="Dislike" asp-route-id="@post.Id">
-                <img src="~/site-images/thumbs-down.png" width="30" />
-            </a>
+                @if (post.ImagePath != null)
+                {
 
-            @if (post.ImagePath != null)
-            {
+                    <img src="~/post-images/@Url.Content(post.ImagePath)" width="200" />
 
-                <img src="~/images/@Url.Content(post.ImagePath)" width="200" />
-
-            }
-
-            <div class="form-group">
-                <label asp-for="CommentDescription" class="control-label">Description</label>
-                <input asp-for="CommentDescription" class="form-control" />
-                <span asp-validation-for="CommentDescription" class="text-danger"></span>
+                }
             </div>
-            <div class="form-group">
-                <label asp-for="Image" class="control-label">Picture</label>
-                <input asp-for="Image" class="form-control-file" />
-                <span asp-validation-for="Image" class="text-danger"></span>
-            </div>
-            @foreach(var comment in Model.Comments)
-            {
+            <form enctype="multipart/form-data" asp-action="Comment">
+                <div class="form-group">
+                    <label asp-for="CommentDescription" class="control-label">Description</label>
+                    <input asp-for="CommentDescription" class="form-control" />
+                    <span asp-validation-for="CommentDescription" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Image" class="control-label">Picture</label>
+                    <input asp-for="Image" class="form-control-file" />
+                    <span asp-validation-for="Image" class="text-danger"></span>
+                </div>
+            </form>
 
-            }
+            <div class="Comment-Div">
+                <a asp-area="" asp-controller="Profile" asp-action="Index" asp-route-id="@comment.UserName">
+                    <img src="~/profile-images/@Url.Content(comment.ProfileImagePath)" width="30" />
+                </a>
+                @if (comment.DislikeComments.Count == 1)
+                {
+                    <h7>@Html.DisplayFor(modelItem => comment.DislikeComments.Count) Dislike</h7>
+                }
+                else if (comment.DislikeComments.Count >= 2)
+                {
+                    <h7>@Html.DisplayFor(modelItem => comment.DislikeComments.Count) Dislikes</h7>
+                }
+                <div class="Comment-Description-Div">
+                    @Html.DisplayFor(modelItem => comment.Description)
+                </div>
+
+                @if (comment.ImagePath != null)
+                {
+
+                    <img src="~/comment-images/@Url.Content(comment.ImagePath)" width="200" />
+
+                }
+            </div>
+
         }
 
     }
@@ -87,6 +114,9 @@
     {
         <div class="Register-Link-Home">
             <h1><a class="Register-Link-Text" href="~/Identity/Account/Register">Register here</a></h1>
+        </div>
+        <div class="Login-Link-Home">
+            <h1><a class="Login-Link-Text" href="~/Identity/Account/Register">Register here</a></h1>
         </div>
     }
 </body>
