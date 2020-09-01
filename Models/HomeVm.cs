@@ -15,5 +15,6 @@ namespace Social_Media.Models
         public ICollection<Comment> Comments { get; set; }
         public string CommentDescription { get; set; }
         public IFormFile CommentImage { get; set; }
+        public int Id { get; set; }
     }
 }

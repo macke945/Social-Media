@@ -70,7 +70,7 @@
 
                 }
             </div>
-            <form enctype="multipart/form-data" asp-action="Comment">
+            <form enctype="multipart/form-data" asp-action="Comment" asp-route-id="@post.Id">
                 <div class="form-group">
                     <label asp-for="CommentDescription" class="control-label">Description</label>
                     <input asp-for="CommentDescription" class="form-control" />
@@ -85,7 +85,7 @@
                     <input type="submit" value="Comment" class="btn btn-primary" />
                 </div>
             </form>
-            @foreach (var comment in Model.Comments)
+            @foreach (var comment in post.Comments)
             {
                 <div class="Comment-Div">
                     <a asp-area="" asp-controller="Profile" asp-action="Index" asp-route-id="@comment.UserName">

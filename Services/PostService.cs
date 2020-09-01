@@ -30,6 +30,7 @@ namespace Social_Media.Services
         {
             return context.Post
             .Include(p => p.DislikePosts)
+            .Include(p => p.Comments)
             .OrderByDescending(x => x.TimeOfPost)
                 .ToList();
         }

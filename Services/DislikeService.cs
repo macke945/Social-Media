@@ -48,8 +48,8 @@ namespace Social_Media.Services
 
         public bool UserAbleToDislikeComment(DislikeComment dislikeComment)
         {
-            return !context.DislikePost
-                .Where(v => v.UserId == dislikeComment.UserId && v.PostId == dislikeComment.CommentId)
+            return !context.DislikeComment
+                .Where(v => v.UserId == dislikeComment.UserId && v.CommentId == dislikeComment.CommentId)
                 .Any();
         }
 
