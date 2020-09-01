@@ -40,6 +40,8 @@ namespace Social_Media.Controllers
         public IActionResult Index(int id)
         {
             var vm = new HomeVm();
+
+
             var allPosts = postService.GetAllPosts();
             vm.Posts = allPosts;
             foreach (var posts in allPosts)
@@ -47,12 +49,13 @@ namespace Social_Media.Controllers
                 var user = _context.Users.FirstOrDefault(x => x.UserName == posts.UserName);
                 posts.ProfileImagePath = user.ProfileImagePath;
                 var commentsByPostId = commentService.GetAllCommentsByPostId(id);
-                vm.Comments = commentsByPostId;
                 foreach (var comments in commentsByPostId)
                 {
+                    vm.Comments = commentsByPostId;
                     var userComment = _context.Users.FirstOrDefault(x => x.UserName == comments.UserName);
                     comments.ProfileImagePath = userComment.ProfileImagePath;
                 }
+
             }
             return View(vm);
         }

@@ -81,8 +81,11 @@
                     <input asp-for="Image" class="form-control-file" />
                     <span asp-validation-for="Image" class="text-danger"></span>
                 </div>
+                <div class="form-group">
+                    <input type="submit" value="Comment" class="btn btn-primary" />
+                </div>
             </form>
-            @foreach (var comment in post.Comments)
+            @foreach (var comment in Model.Comments)
             {
                 <div class="Comment-Div">
                     <a asp-area="" asp-controller="Profile" asp-action="Index" asp-route-id="@comment.UserName">
@@ -117,7 +120,7 @@
             <h1><a class="Register-Link-Text" href="~/Identity/Account/Register">Register here</a></h1>
         </div>
         <div class="Login-Link-Home">
-            <h1><a class="Login-Link-Text" href="~/Identity/Account/Register">Register here</a></h1>
+            <h1><a class="Login-Link-Text" href="~/Identity/Account/Login">Log in here</a></h1>
         </div>
     }
 </body>
