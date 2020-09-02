@@ -28,7 +28,7 @@ namespace Social_Media.Controllers
             _context = context;
         }
 
-        public IActionResult Index(string id)
+        public IActionResult Profile(string id)
         {
             var vm = new ProfileVm();
             ClaimsPrincipal currentUser = this.User;
@@ -45,7 +45,7 @@ namespace Social_Media.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Index(ProfileVm vm)
+        public async Task<IActionResult> Profile(ProfileVm vm)
         {
             ClaimsPrincipal currentUser = this.User;
             var currentUserId = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
@@ -71,7 +71,7 @@ namespace Social_Media.Controllers
                 user.ProfileImagePath = uniqueFileName;
                 profileService.EditProfile(user);
             }
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Profile));
         }
     }
 }

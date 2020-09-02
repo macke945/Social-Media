@@ -49,10 +49,10 @@
                 {
                     <h7>@Html.DisplayFor(modelItem => post.DislikePosts.Count) Dislikes</h7>
                 }
-                <a asp-area="" asp-controller="Profile" asp-action="Index" asp-route-id="@post.UserName">
+                <a asp-area="" asp-controller="Profile" asp-action="Profile" asp-route-id="@post.UserName">
                     <img src="~/profile-images/@Url.Content(post.ProfileImagePath)" width="30" />
                 </a>
-                <a asp-area="" asp-controller="Profile" asp-action="Index" asp-route-id="@post.UserName">
+                <a asp-area="" asp-controller="Profile" asp-action="Profile" asp-route-id="@post.UserName">
                     @Html.DisplayFor(modelItem => post.UserName)
                 </a>
                 <div class="Post-Description-Div">
@@ -88,7 +88,7 @@
             @foreach (var comment in post.Comments)
             {
                 <div class="Comment-Div">
-                    <a asp-area="" asp-controller="Profile" asp-action="Index" asp-route-id="@comment.UserName">
+                    <a asp-area="" asp-controller="Profile" asp-action="Profile" asp-route-id="@comment.UserName">
                         <img src="~/profile-images/@Url.Content(comment.ProfileImagePath)" width="30" />
                     </a>
                     @if (comment.DislikeComments.Count == 1)
