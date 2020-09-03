@@ -43,10 +43,16 @@ namespace Social_Media.Controllers
 
             var allPosts = postService.GetAllPosts();
             vm.Posts = allPosts;
+            var allComments = commentService.GetAllComments();
             foreach (var posts in allPosts)
             {
                 var user = _context.Users.FirstOrDefault(x => x.UserName == posts.UserName);
                 posts.ProfileImagePath = user.ProfileImagePath;
+            }
+            foreach(var comments in allComments)
+            {
+                var user = _context.Users.FirstOrDefault(x => x.UserName == comments.UserName);
+                comments.ProfileImagePath = user.ProfileImagePath;
             }
             return View(vm);
         }

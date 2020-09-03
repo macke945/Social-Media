@@ -25,9 +25,9 @@ namespace Social_Media.Services
             context.SaveChanges();
         }
 
-        public ICollection<Comment> GetAllCommentsByPostId(int id)
+        public ICollection<Comment> GetAllComments()
         {
-            return context.Comment.Where(p => p.PostId == id)
+            return context.Comment
             .Include(p => p.DislikeComments)
             .OrderByDescending(x => x.TimeOfPost)
                 .ToList();
