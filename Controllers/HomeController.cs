@@ -44,6 +44,7 @@ namespace Social_Media.Controllers
             var allPosts = postService.GetAllPosts();
             vm.Posts = allPosts;
             var allComments = commentService.GetAllComments();
+            vm.Comments = allComments;
             foreach (var posts in allPosts)
             {
                 var user = _context.Users.FirstOrDefault(x => x.UserName == posts.UserName);
@@ -128,7 +129,7 @@ namespace Social_Media.Controllers
 
             ClaimsPrincipal currentUser = this.User;
             var currentUserId = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
-            comment.Description = vm.Description;
+            comment.Description = vm.CommentDescription;
             comment.UserId = currentUserId;
             comment.PostId = id;
             var UserName = commentService.GetUserNameById(currentUserId);
@@ -140,15 +141,15 @@ namespace Social_Media.Controllers
                 commentService.AddComment(comment);
             }
 
-            else if (commentService.IsImage(vm.Image) && vm.Image.Length < (3 * 1024 * 1024))
+            else if (commentService.IsImage(vm.CommentImage) && vm.CommentImage.Length < (3 * 1024 * 1024))
             {
-                string uploadFolder = Path.Combine(hostingEnvironment.WebRootPath, "images");
-                uniqueFileName = Guid.NewGuid().ToString() + "_" + vm.Image.FileName;
+                string uploadFolder = Path.Combine(hostingEnvironment.WebRootPath, "comment-images");
+                uniqueFileName = Guid.NewGuid().ToString() + "_" + vm.CommentImage.FileName;
                 string filePath = Path.Combine(uploadFolder, uniqueFileName);
 
                 using (var fileStream = new FileStream(filePath, FileMode.Create))
                 {
-                    vm.Image.CopyTo(fileStream);
+                    vm.CommentImage.CopyTo(fileStream);
                 }
                 comment.ImagePath = uniqueFileName;
                 commentService.AddComment(comment);

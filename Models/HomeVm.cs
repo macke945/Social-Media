@@ -11,9 +11,9 @@ namespace Social_Media.Models
     {
         public ICollection<Post> Posts { get; set; } = new List<Post>();
         public string Description { get; set; }
+        public string CommentDescription { get; set; }
         public IFormFile Image { get; set; }
         public ICollection<Comment> Comments { get; set; }
-        public string CommentDescription { get; set; }
         public IFormFile CommentImage { get; set; }
         public int Id { get; set; }
     }
