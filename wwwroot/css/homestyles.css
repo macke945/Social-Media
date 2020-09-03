@@ -1,16 +1,9 @@
-﻿.Register-Link-Home {
-    width: 300px;
-    height: 300px;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
+﻿
+.Register-Link-Text {
+    font-size: 60px;
+    text-align:center;
 }
 
-.Register-Link-Text {
-    font-size: 80px;
-    text-align:center;
-    word-break:keep-all;
+.Login-Link-Text {
+    text-align: center;
 }

@@ -3,29 +3,21 @@
 @inject SignInManager<Social_Media.Data.DataTables.ApplicationUser> SignInManager
 @inject UserManager<Social_Media.Data.DataTables.ApplicationUser> UserManager
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Social_Media</title>
-    <link rel="stylesheet" href="~/css/homestyles.css" type="text/css" />
-</head>
-<body>
-    @if (SignInManager.IsSignedIn(User))
-    {
+
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <div class="post-container">
         <div class="row">
             <div class="col-md-4">
                 <form enctype="multipart/form-data" asp-action="Index">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group">
-                        <label asp-for="Description" class="control-label">Description</label>
                         <input asp-for="Description" class="form-control" />
                         <span asp-validation-for="Description" class="text-danger"></span>
                     </div>
 
                     <div class="form-group">
-                        <label asp-for="Image" class="control-label">Picture</label>
                         <input asp-for="Image" class="form-control-file" />
                         <span asp-validation-for="Image" class="text-danger"></span>
                     </div>
@@ -72,12 +64,10 @@
             </div>
             <form enctype="multipart/form-data" asp-action="Comment" asp-route-id="@post.Id">
                 <div class="form-group">
-                    <label asp-for="CommentDescription" class="control-label">Description</label>
                     <input asp-for="CommentDescription" class="form-control" />
                     <span asp-validation-for="CommentDescription" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="CommentImage" class="control-label">Picture</label>
                     <input asp-for="CommentImage" class="form-control-file" />
                     <span asp-validation-for="CommentImage" class="text-danger"></span>
                 </div>
@@ -119,15 +109,12 @@
             }
         }
 
-    }
-    else
-    {
-        <div class="Register-Link-Home">
-            <h1><a class="Register-Link-Text" href="~/Identity/Account/Register">Register here</a></h1>
-        </div>
-        <div class="Login-Link-Home">
-            <h1><a class="Login-Link-Text" href="~/Identity/Account/Login">Log in here</a></h1>
-        </div>
-    }
-</body>
-</html>
+    </div>
+}
+else
+{
+    <div class="Register-Container">
+        <h1><a class="Register-Link-Text" href="~/Identity/Account/Register">Register here</a></h1>
+        <h6><a class="Login-Link-Text" href="~/Identity/Account/Login">already have an account? log in here</a></h6>
+    </div>
+}

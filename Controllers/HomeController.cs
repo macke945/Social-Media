@@ -57,6 +57,10 @@ namespace Social_Media.Controllers
             }
             return View(vm);
         }
+        public IActionResult Contacts()
+        {
+            return View();
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]

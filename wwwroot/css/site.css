@@ -53,6 +53,19 @@ button.accept-policy {
     line-height: inherit;
 }
 
+.Register-Link-Home {
+    position: absolute;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
