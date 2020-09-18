@@ -87,16 +87,15 @@
                                 <h7>@Html.DisplayFor(modelItem => comment.DislikeComments.Count) Dislikes</h7>
                             }
                         </div>
-
+                        <a asp-area="" asp-action="DislikeComment" asp-route-id="@comment.Id">
+                            <img src="~/site-images/thumbs-down.png" width="30" />
+                        </a>
                         @if (comment.ImagePath != null)
                         {
 
                             <img src="~/comment-images/@Url.Content(comment.ImagePath)" width="200" />
 
                         }
-                        <a asp-area="" asp-action="DislikeComment" asp-route-id="@comment.Id">
-                            <img src="~/site-images/thumbs-down.png" width="30" />
-                        </a>
                     </div>
 
                 }
