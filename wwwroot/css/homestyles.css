@@ -1,11 +1,12 @@
 ﻿body {
     grid-template-columns: 1fr repeat(12, minmax(auto, 4.2rem)) 1fr;
     grid-template-rows: 7.8rem 20rem 5rem auto;
-    background-color: #fce5ec;
+    background-color: #ffffff;
 }
+
 .Register-Link-Text {
     font-size: 60px;
-    text-align:center;
+    text-align: center;
 }
 
 .Login-Link-Text {
@@ -13,26 +14,48 @@
 }
 
 .post-container {
+    box-sizing: border-box;
+    border: solid #dfe3ee 2px;
+    padding: 5px;
     grid-column: 3 / span 10;
-    border-style: solid;
+    border-radius: 15px;
+    margin: 10px;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .post-div {
-    border-style: solid;
-    position:relative;
-    width: 50%;
-    margin: auto;
+    box-sizing: border-box;
+    position: relative;
+    width: 30%;
+    padding: 20px;
 }
 
 .comment-div {
-    border-style: solid;
+    box-sizing: border-box;
+    border: solid #f7f7f7 2px;
+    position: relative;
+    width: 30%;
+    margin: 5px;
+    padding: 5px;
+    border-radius: 30px;
+    background-color: #f7f7f7;
+}
+
+.add-comment-div {
     position: relative;
     width: 50%;
     margin: auto;
 }
 
-.add-comment-div {
-        position:relative;
-        width: 50%;
-        margin: auto;
+.add-post-div {
+    position: relative;
+    margin: auto;
+    width: 50%;
+}
+
+#post-text {
+    position: relative;
+    width: 500px;
 }

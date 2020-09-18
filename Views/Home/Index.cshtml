@@ -5,36 +5,37 @@
 
 
 <head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/homestyles.css" type="text/css" />
+    <link rel="stylesheet" href="~/css/site.css" type="text/css" />
 </head>
-
 <body>
     @if (SignInManager.IsSignedIn(User))
     {
-        <div class="row">
-            <div class="col-md-4">
-                <form enctype="multipart/form-data" asp-action="Index">
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <div class="form-group">
-                        <input asp-for="Description" class="form-control" />
-                        <span asp-validation-for="Description" class="text-danger"></span>
-                    </div>
+        <div class="add-post-div">
+            <div class="row">
+                <div class="col-md-4">
+                    <form enctype="multipart/form-data" asp-action="Index">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group"  id="post-text">
+                            <input asp-for="Description" class="form-control" placeholder="Hello @User.Identity.Name, what are you doing right now? " />
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
 
-                    <div class="form-group">
-                        <input asp-for="Image" class="form-control-file" />
-                        <span asp-validation-for="Image" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <input type="submit" value="Post" class="btn btn-primary" />
-                    </div>
-                </form>
+                        <div class="form-group">
+                            <input asp-for="Image" class="form-control-file" />
+                            <span asp-validation-for="Image" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Post" class="btn btn-primary" hidden />
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
 
-
-        <div class="post-container">
-            @foreach (var post in Model.Posts)
-            {
+        @foreach (var post in Model.Posts)
+        {
+            <div class="post-container">
 
                 <div class="post-div">
                     @if (post.DislikePosts.Count == 1)
@@ -102,11 +103,11 @@
                 <div class="add-comment-div">
                     <form enctype="multipart/form-data" asp-action="Comment" asp-route-id="@post.Id">
                         <div class="form-group">
-                            <input asp-for="CommentDescription" class="form-control" />
+                            <input asp-for="CommentDescription" class="form-control" placeholder="Write a comment ..." />
                             <span asp-validation-for="CommentDescription" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <input asp-for="CommentImage" class="glyphicon glyphicon-camera" />
+                            <input asp-for="CommentImage" class="fas fa-camera" />
                             <span asp-validation-for="CommentImage" class="text-danger"></span>
                         </div>
                         <div class="form-group">
@@ -114,9 +115,9 @@
                         </div>
                     </form>
                 </div>
-            }
+            </div>
+        }
 
-        </div>
     }
     else
     {

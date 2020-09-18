@@ -84,7 +84,7 @@ namespace Social_Media.Controllers
 
                 else if (postService.IsImage(vm.Image) && vm.Image.Length < (3 * 1024 * 1024))
                 {
-                    string uploadFolder = Path.Combine(hostingEnvironment.WebRootPath, "images");
+                    string uploadFolder = Path.Combine(hostingEnvironment.WebRootPath, "post-images");
                     uniqueFileName = Guid.NewGuid().ToString() + "_" + vm.Image.FileName;
                     string filePath = Path.Combine(uploadFolder, uniqueFileName);
 
