@@ -1,4 +1,8 @@
-﻿
+﻿body {
+    grid-template-columns: 1fr repeat(12, minmax(auto, 4.2rem)) 1fr;
+    grid-template-rows: 7.8rem 20rem 5rem auto;
+    background-color: #fce5ec;
+}
 .Register-Link-Text {
     font-size: 60px;
     text-align:center;
@@ -6,4 +10,29 @@
 
 .Login-Link-Text {
     text-align: center;
+}
+
+.post-container {
+    grid-column: 3 / span 10;
+    border-style: solid;
+}
+
+.post-div {
+    border-style: solid;
+    position:relative;
+    width: 50%;
+    margin: auto;
+}
+
+.comment-div {
+    border-style: solid;
+    position: relative;
+    width: 50%;
+    margin: auto;
+}
+
+.add-comment-div {
+        position:relative;
+        width: 50%;
+        margin: auto;
 }
