@@ -18,7 +18,7 @@
     border: solid #dfe3ee 2px;
     padding: 5px;
     grid-column: 3 / span 10;
-    border-radius: 15px;
+    border-radius: 10px;
     margin: 10px;
     width: 60%;
     margin-left: auto;
@@ -28,8 +28,7 @@
 .post-div {
     box-sizing: border-box;
     position: relative;
-    width: 30%;
-    padding: 20px;
+    width: 100%;
 }
 
 .comment-div {
@@ -47,6 +46,7 @@
     position: relative;
     width: 50%;
     margin: auto;
+    padding: 10px;
 }
 
 .add-post-div {
@@ -58,4 +58,29 @@
 #post-text {
     position: relative;
     width: 500px;
+}
+
+.post-pic-div {
+    position: relative;
+    width: 100%;
+    height: 80%;
+    margin: auto;
+}
+
+.post-pic {
+    position: relative;
+    width: 100%;
+}
+
+.profile-pic-div {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.profile-pic {
+    width: 100%;
+    height: auto;
 }
