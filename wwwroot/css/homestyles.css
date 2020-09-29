@@ -21,8 +21,11 @@
     border-radius: 10px;
     margin: 10px;
     width: 60%;
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: 20%;
+    margin-right: 20%;
+    display: inline-flex;
+    flex-direction: column;
+    flex-wrap: wrap;
 }
 
 .post-div {
@@ -32,14 +35,18 @@
 }
 
 .comment-div {
+    word-wrap: break-word;
     box-sizing: border-box;
     border: solid #f7f7f7 2px;
     position: relative;
-    width: 30%;
+    flex: 1 0 auto;
     margin: 5px;
-    padding: 5px;
+    padding: 15px;
     border-radius: 30px;
     background-color: #f7f7f7;
+    display: inline-block;
+    max-width: 100%;
+    
 }
 
 .add-comment-div {
@@ -81,6 +88,17 @@
 }
 
 .profile-pic {
+    width: 100%;
+    height: auto;
+}
+
+.dislike-div-comment {
+    position: relative;
+    width: 30px;
+    height: 30px;
+}
+
+.dislike-button-comment {
     width: 100%;
     height: auto;
 }

@@ -7,6 +7,7 @@
 <head>
     <link rel="stylesheet" href="~/css/homestyles.css" type="text/css" />
     <link rel="stylesheet" href="~/css/site.css" type="text/css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 </head>
 <body>
     @if (SignInManager.IsSignedIn(User))
@@ -57,15 +58,16 @@
                     <div class="post-description-div">
                         @Html.DisplayFor(modelItem => post.Description)
                     </div>
-
-                    <a asp-area="" asp-action="Dislike" asp-route-id="@post.Id">
-                        <img src="~/site-images/thumbs-down.png" width="30" />
-                    </a>
+                    <div class="dislike-div-post">
+                        <a asp-area="" asp-action="Dislike" asp-route-id="@post.Id">
+                            <img class="dislike-button-post" src="~/site-images/thumbs-down.png" width="30" />
+                        </a>
+                    </div>
 
                     @if (post.ImagePath != null)
                     {
                         <div class="post-pic-div">
-                            <img class="post-pic"src="~/post-images/@Url.Content(post.ImagePath)" />
+                            <img class="post-pic" src="~/post-images/@Url.Content(post.ImagePath)" />
                         </div>
 
                     }
@@ -91,9 +93,9 @@
                                 <h7>@Html.DisplayFor(modelItem => comment.DislikeComments.Count) Dislikes</h7>
                             }
                         </div>
-                        <div class="dislike-div">
+                        <div class="dislike-div-comment">
                             <a asp-area="" asp-action="DislikeComment" asp-route-id="@comment.Id">
-                                <img class="dislike-button" src="~/site-images/thumbs-down.png" />
+                                <img class="dislike-button-comment" src="~/site-images/thumbs-down.png" />
                             </a>
                         </div>
                         @if (comment.ImagePath != null)
